@@ -1,5 +1,5 @@
 package com.challenge.cmg.model;
 
-public class Compra {
+public class Buy {
     
 }

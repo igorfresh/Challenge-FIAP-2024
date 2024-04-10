@@ -15,15 +15,15 @@ Benefícios Esperados:
 
 ## Integrantes
 
-Igor Miguel Silva
+Igor Miguel Silva: Desenvolvedor back-end
 
-João Pedro Costa Feitosa
+João Pedro Costa Feitosa: Administrador do banco de dados
 
-Kaue Santana
+Kaue Matheus Santana: Desenvolvedor Machine Learning e QA
 
-Gustavo René
+Gustavo René Dias Boamorte: Desenvolvedor .NET
 
-Pedro Felipe Barros
+Pedro Felipe Barros da Silva: Desenvolvedor Mobile
 
 
 
@@ -166,3 +166,8 @@ Atualizar os dados do client com o `id` informado no path, utilizando os novos d
 |400 | Validação falhou. Verifique as regras para o corpo da requisição
 |401 | Usuário não autenticado. Realize autenticação em /login
 |404 | Não existe cliente com o `id` informado. Consulte lista em /categoria
+
+## Como rodar a aplicação:
+
+Clonar o repositório, abri-lo numa IDE apropriada (no VS-code, por exemplo, ter as extensões apropriadas do Java e SpringBoot) e clicar no botão de run java.
+
