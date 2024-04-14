@@ -1,7 +1,5 @@
 package com.challenge.cmg.model;
 
-import java.util.Date;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,13 +9,10 @@ import lombok.Data;
 @Data
 @Entity
 
-public class Buy {
-
+public class ProductCategory {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Client idCLient;
-    private Product idProduct;
-    private Date datePurchase;
-    
-    
+    private String name;
 }
+
+

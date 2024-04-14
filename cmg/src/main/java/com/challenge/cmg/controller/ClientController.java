@@ -24,6 +24,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.challenge.cmg.model.Client;
 import com.challenge.cmg.repository.ClientRepository;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("client")
@@ -41,7 +43,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Client create(@RequestBody Client client) {
+    public Client create(@RequestBody @Valid Client client) {
         log.info("cadastrando cliente {}", client);
         return repository.save(client);
     }

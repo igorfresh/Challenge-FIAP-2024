@@ -1,6 +1,6 @@
 package com.challenge.cmg.model;
 
-import java.util.Date;
+import java.math.BigDecimal;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,13 +11,12 @@ import lombok.Data;
 @Data
 @Entity
 
-public class Buy {
-
+public class PurchasedItens {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Client idCLient;
     private Product idProduct;
-    private Date datePurchase;
-    
-    
+    private Buy idBuy;
+    private int quantityItens;
+    private BigDecimal unityPrice;
 }
+    
