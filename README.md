@@ -44,7 +44,7 @@ Igor | 15/04 | Finalização de validação
 <img src="/imgs/img20_page-0001.jpg">
 
 ## Video explicativo
-[![Video Youtube]](https://www.youtube.com/watch?v=UZNU6DygUj8)
+[[Video Pitch]](https://www.youtube.com/watch?v=UZNU6DygUj8)
 
  ## Documentação
 
