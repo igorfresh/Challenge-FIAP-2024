@@ -42,6 +42,7 @@ Igor | 15/04 | Finalização de validação
 ## Diagramas e arquitetura
 
 <img src="/imgs/img20_page-0001.jpg">
+<img src="imgs/Diagram 2024-04-15 20-36-17.png">
 
 ## Video explicativo
 [[Video Pitch]](https://www.youtube.com/watch?v=UZNU6DygUj8)
@@ -74,6 +75,11 @@ Igor | 15/04 | Finalização de validação
 	"cep": "12345-678"
 }
 ```
+
+##### Exemplos de validações da requisição
+
+<img src="imgs/validation-client.png">
+
 ### Product
 
 `GET` /product - Retorna um array com todos os produtos cadastrados.
@@ -92,6 +98,10 @@ Igor | 15/04 | Finalização de validação
 	"price": 45.99
 }
 ```
+##### Exemplos de validações da requisição
+
+<img src="imgs/validation-product.png">
+
 ### Buy
 
 `GET` /buy - Retorna um array com todos as compras cadastradas.
@@ -112,6 +122,11 @@ Igor | 15/04 | Finalização de validação
 	"totalPurchaseValue": 21.99
 }
 ```
+
+##### Exemplos de validações da requisição
+
+<img src="imgs/validation-buy.png">
+
 ### Product Category
 
 `GET` /productCategory - Retorna um array com todos as categorias de produtos cadastradas.
@@ -129,6 +144,11 @@ Igor | 15/04 | Finalização de validação
 	"name": "Mouses"
 }
 ```
+
+##### Exemplos de validações da requisição
+
+<img src="imgs/validation--productCategory.png">
+
 ### Purchased Itens
 
 `GET` /purchasedItens - Retorna um array com todos os produtos comprados de produtos cadastradas.
@@ -150,7 +170,36 @@ Igor | 15/04 | Finalização de validação
 }
 ```
 
+##### Exemplos de validações da requisição
+
+<img src="imgs/validation-purchasedItens.png">
+
 ### Como rodar a aplicação:
 
-Clonar o repositório, abri-lo numa IDE apropriada (no VS-code, por exemplo, ter as extensões apropriadas do Java e SpringBoot) e clicar no botão de run java.
+- Clone o repositório: Abra o navegador da web e acesse o GitHub. Encontre o repositório do projeto que deseja clonar e clique no botão "Clone" para obter a URL do repositório.
+
+- Abra o Git Bash ou outro cliente Git de sua preferência e execute o comando para clonar o repositório
+
+- Abra o projeto: Navegue até o diretório onde o projeto foi clonado em seu sistema de arquivos.
+
+- Configure o ambiente: Verifique se você tem o Java JDK e o Maven instalados em sua máquina. Se não estiverem instalados, baixe e instale-os nos sites oficiais do Java e do Maven.
+
+- Build do projeto: Abra o projeto em sua IDE Java favorita (por exemplo, IntelliJ IDEA, Eclipse, etc.). Certifique-se de que a IDE esteja configurada corretamente para reconhecer um projeto Maven.
+
+- Dentro da IDE, localize o arquivo de configuração do banco de dados (normalmente application.properties ou application.yml) e verifique as configurações de banco de dados. Certifique-se de que o banco de dados H2 esteja configurado corretamente.
+
+- Execute o projeto: Dentro da IDE, execute a classe principal do projeto, nomeada como CmgApplication. Isso iniciará o servidor Spring Boot.
+
+- Acesse o console H2: Abra um navegador da web e digite o seguinte URL para acessar o console H2:
+`http://localhost:8080/h2-console`
+- Isso abrirá a interface do console H2. Insira as informações de conexão do banco de dados conforme configurado no arquivo de propriedades:
+```
+JDBC URL: jdbc:h2:mem:personalBuy
+Username: sa
+Password: (deixe em branco)
+```
+
+- Após preencher as informações, clique no botão "Connect" para acessar o console H2 e visualizar o banco de dados.
+
+ - Acesse a aplicação: Após iniciar o servidor, você pode acessar a aplicação em um navegador da web digitando http://localhost:8080 na barra de endereço.
 
