@@ -1,12 +1,15 @@
 package com.challenge.cmg.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
@@ -14,13 +17,16 @@ import lombok.Data;
 @Entity
 
 public class Buy {
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String idCLient;
-    private Date datePurchase;
+    @NotBlank(message = "{buy.idclient.notblank}")
+    private String idClient;
+    @NotNull(message = "{buy.datepurchase.notblank}")
+    @PastOrPresent(message = "{buy.datepurchase.pastorpresent}")
+    private LocalDate datePurchase;
     private String purchaseStatus;
-    @Positive
+    @Positive(message = "{buy.totalPurchaseValue.positive}")
     private BigDecimal totalPurchaseValue;
-    
+
 }

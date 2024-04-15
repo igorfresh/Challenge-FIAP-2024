@@ -24,6 +24,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.challenge.cmg.model.Buy;
 import com.challenge.cmg.repository.BuyRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("buy")
 public class BuyController {
@@ -40,7 +42,7 @@ public class BuyController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Buy create(@RequestBody Buy buy) {
+    public Buy create(@RequestBody @Valid Buy buy) {
         log.info("cadastrando compra {}", buy);
         return repository.save(buy);
     }

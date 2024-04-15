@@ -24,6 +24,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.challenge.cmg.model.ProductCategory;
 import com.challenge.cmg.repository.ProductCategoryRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("productCategory")
 public class ProductCategoryController {
@@ -44,7 +46,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public ProductCategory create(@RequestBody ProductCategory productCategory) {
+    public ProductCategory create(@RequestBody @Valid ProductCategory productCategory) {
         log.info("cadastrando cliente {}", productCategory);
         return repository.save(productCategory);
     } 

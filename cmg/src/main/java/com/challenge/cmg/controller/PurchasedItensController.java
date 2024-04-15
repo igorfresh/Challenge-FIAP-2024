@@ -24,6 +24,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.challenge.cmg.model.PurchasedItens;
 import com.challenge.cmg.repository.PurchasedItensRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("purchasedItens")
 public class PurchasedItensController {
@@ -40,7 +42,7 @@ public class PurchasedItensController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public PurchasedItens create(@RequestBody PurchasedItens purchasedItens) {
+    public PurchasedItens create(@RequestBody @Valid PurchasedItens purchasedItens) {
         log.info("cadastrando itens comprados {}", purchasedItens);
         return repository.save(purchasedItens);
     } 

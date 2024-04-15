@@ -37,8 +37,9 @@ João | 11/04 | Diagrama de entidades
 Igor | 13/04 | Refatoração de entidades
 Igor | 14/04 | Finalização projeto - sem validação
 Igor | 15/04 | Implementação de validação
+Igor | 15/04 | Finalização de validação
 
-##Diagramas e arquitetura
+## Diagramas e arquitetura
 
 <img src="/imgs/img20_page-0001.jpg">
 
@@ -53,134 +54,7 @@ Igor | 15/04 | Implementação de validação
 
  ### Endpoints
 
-- [Listar clientes](#listar-cliente)
-- [Cadastrar clientes](#cadastrar-cliente)
-- [Detalhes do cliente](#detalhes-do-cliente)
-- [Apagar cliente](#apagar-cliente)
-- [Atualizar cliente](#atualizar-cliente)
 
-### Listar Clientes
-`GET` /client
-
-Retorna um array com todos clientes cadastradas.
-
-#### Exemplo de resposta
-```js
-[
-    {
-        "nome": "Cadernos",
-        "icone": "notebook"
-    },
-    {
-        "id": 2,
-        "nome": "Canetas",
-        "icone": "pen"
-    }
-]
-```
-
-#### Código de Status
-
-| código | descrição
-|--------|---------
-|200 | Clientes retornadas com sucesso
-|401 | Usuário não autenticado. Realize autenticação em /login
-
-### Cadastrar Cliente
-
-`POST` /cadastrar
-
-Cadastrar um novo cliente com os dados enviados no corpo da requisição.
-
-#### Corpo da Requisição
-
-| campos | tipo | obrigatório | descrição
-|--------|------|:-------------:|----------
-|nome|string|✅| Um nome curto para o cliente com pelo menos 3 caracteres
-|icone|string|❌| O nome do ícone conforme Material Icons
-
-#### Exemplo de Resposta
-
-```js
-{
-    "nome": "Cadernos",
-    "icone": "notebook"
-}
-```
-
-#### Código de Status
-
-| código | descrição
-|--------|---------
-|200 | Clientes retornados com sucesso
-|400 | Validação falhou. Verifique as regras para o corpo da requisição.
-|401 | Usuário não autenticado. Realize autenticação em /login
-
-### Detalhes da Cliente
-`GET` /client/`{id}`
-
-Retorna os dados detalhados do cliente com o `id` informado no parametro de path.
-
-### Exemplo de Resposta
-```js
-//requisição para /client/1
-{
-    "id": 1,
-    "nome": "Cadernos",
-    "icone": "notebook"
-}
-```
-
-#### Código de Status
-
-| código | descrição
-|--------|----------
-|200 | Clientes retornados com sucesso
-|401 | Usuário não autenticado. Realize autenticação em /login
-|404 | Não existe cliente com o `id` informado. Consulte lista em /categoria
-
-### Apagar Cliente
-
-`DELETE` /client/ `{id}`
-
-Apaga o cliente indicada pelo `id` enviado no parametro de path. 
-
-#### Código de Status
-
-| código | descrição
-|--------|----------
-|204 | Cliente apagada com sucesso.
-|401 | Usuário não autenticado. Realize autenticação em /login
-|404 | Não existe cliente com o `id` informado. Consulte lista em /categoria
-
-### Atualizar Cliente
-
-`PUT` /client/`{id}`
-
-Atualizar os dados do client com o `id` informado no path, utilizando os novos dados enviados no corpo da requisição.
-
-#### Corpo da Requisição
-
-| campos | tipo | obrigatório | descrição
-|--------|------|:-------------:|----------
-|nome|string|✅| Um nome curto para a categoria com pelo menos 3 caracteres
-|icone|string|❌| O nome do ícone conforme Material Icons
-
-```js
-{
-    "nome": "Cadernos",
-    "icone": "notebook"
-}
-```
-
-#### Código de Status
-
-| código | descrição
-|--------|----------
-|200 | Cliente atualizado com sucesso.
-|400 | Validação falhou. Verifique as regras para o corpo da requisição
-|401 | Usuário não autenticado. Realize autenticação em /login
-|404 | Não existe cliente com o `id` informado. Consulte lista em /categoria
 
 ## Como rodar a aplicação:
 

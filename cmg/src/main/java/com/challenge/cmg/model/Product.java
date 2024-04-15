@@ -20,7 +20,7 @@ public class Product {
     @NotBlank(message = "{product.name.notblank}")
     @Size(min=3, message = "{product.name.size}")
     private String name;
-    @Positive
+    @Positive(message = "{product.price.positive}")
     private BigDecimal price;
     
     
