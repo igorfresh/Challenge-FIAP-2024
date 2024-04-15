@@ -43,7 +43,7 @@ Igor | 15/04 | Implementação de validação
 <img src="/imgs/img20_page-0001.jpg">
 
 ## Video explicativo
-[![JAVA]([http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg](https://virandoprogramador.com.br/wp-content/uploads/2023/11/o-que-e-java.jpg))]((https://www.youtube.com/watch?v=UZNU6DygUj8))
+![Video Youtube]([http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)] (https://virandoprogramador.com.br/wp-content/uploads/2023/11/o-que-e-java.jpg)((https://www.youtube.com/watch?v=UZNU6DygUj8))
 (https://www.youtube.com/watch?v=UZNU6DygUj8)
 
 ## Requisitos
