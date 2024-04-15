@@ -38,7 +38,7 @@ Igor | 13/04 | Refatoração de entidades
 Igor | 14/04 | Finalização projeto - sem validação
 Igor | 15/04 | Implementação de validação
 
-##Diagramas e arquitetura
+## Diagramas e arquitetura
 
 <img src="/imgs/img20_page-0001.jpg">
 
