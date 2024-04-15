@@ -43,7 +43,7 @@ Igor | 15/04 | Implementação de validação
 <img src="/imgs/img20_page-0001.jpg">
 
 ## Video explicativo
-[![Video Youtube]([http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=UZNU6DygUj8)
+[![Video Youtube]([[http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg](https://yt3.googleusercontent.com/Zb1y7q5TA2SEBErm9U21Zczm2AXxPUQEBSjF9nru2bLIsbQbGRhZQnNg82rujynZb_PwcZctSQ=s900-c-k-c0x00ffffff-no-rj))](https://www.youtube.com/watch?v=UZNU6DygUj8)
 
 ## Requisitos
 
