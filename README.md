@@ -1,4 +1,4 @@
-z# Personal Buy - Challenge FIAP 2024
+## Personal Buy - Challenge FIAP 2024
 
 Repositório destinado ao projeto do Challenge de 2024 da FIAP, na matéria de Java Advanced da faculdade.
 
