@@ -1,4 +1,4 @@
-# Personal Buy - Challenge FIAP 2024
+## Personal Buy - Challenge FIAP 2024
 
 Repositório destinado ao projeto do Challenge de 2024 da FIAP, na matéria de Java Advanced da faculdade.
 
@@ -42,6 +42,9 @@ Igor | 15/04 | Finalização de validação
 ## Diagramas e arquitetura
 
 <img src="/imgs/img20_page-0001.jpg">
+
+## Video explicativo
+[![Video Youtube]](https://www.youtube.com/watch?v=UZNU6DygUj8)
 
 ## Requisitos
 
