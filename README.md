@@ -46,20 +46,111 @@ Igor | 15/04 | Finalização de validação
 ## Video explicativo
 [![Video Youtube]](https://www.youtube.com/watch?v=UZNU6DygUj8)
 
-## Requisitos
-
- - [ ] CRUD de Clientes
- - [ ] CRUD de Produtos
- - [ ] CRUD de Usuários
-
  ## Documentação
-
 
  ### Endpoints
 
+### Client
 
+`GET` /client - Retorna um array com todas os clientes cadastrados.
 
-## Como rodar a aplicação:
+`POST` /client - Cadastrar um novo usuário com os dados enviados no corpo da requisição.
+
+`GET` /client/`{id}` - Retorna os dados detalhados do client com o `id` informado no parametro de path.
+
+`DELETE` /client/ `{id}` - Apaga o client indicado pelo `id` enviado no parametro de path. 
+
+`PUT` /client/`{id}` - Atualizar os dados do cliente com o `id` informado no path, utilizando os novos dados enviados no corpo da requisição.
+
+```js
+{
+	"name": "Tamires Alves",
+	"cpf": "123.456.789-90",
+	"email": "tamialves@gmail.com.br",
+	"phone":"(11) 91234-5678",
+	"adress": "Rua Pesadelo Java, 777",
+	"city": "Sâo Paulo",
+	"state": "SP",
+	"cep": "12345-678"
+}
+```
+### Product
+
+`GET` /product - Retorna um array com todos os produtos cadastrados.
+
+`POST` /product - Cadastrar um novo produto com os dados enviados no corpo da requisição.
+
+`GET` /product/`{id}` - Retorna os dados detalhados do produto com o `id` informado no parametro de path.
+
+`DELETE` /product/ `{id}` - Apaga o produto indicado pelo `id` enviado no parametro de path. 
+
+`PUT` /product/`{id}` - Atualizar os dados do produto com o `id` informado no path, utilizando os novos dados enviados no corpo da requisição.
+
+```js
+{
+	"name": "Mouse Gamer",
+	"price": 45.99
+}
+```
+### Buy
+
+`GET` /buy - Retorna um array com todos as compras cadastradas.
+
+`POST` /buy - Cadastrar uma nova compra com os dados enviados no corpo da requisição.
+
+`GET` /buy/`{id}` - Retorna os dados detalhados da compra com o `id` informado no parametro de path.
+
+`DELETE` /buy/ `{id}` - Apaga a compra indicado pelo `id` enviado no parametro de path. 
+
+`PUT` /buy/`{id}` - Atualizar os dados da compra com o `id` informado no path, utilizando os novos dados enviados no corpo da requisição.
+
+```js
+{
+	"idClient": "1",
+	"datePurchase": "2023-10-10",
+	"purchaseStatus": "Em transito",
+	"totalPurchaseValue": 21.99
+}
+```
+### Product Category
+
+`GET` /productCategory - Retorna um array com todos as categorias de produtos cadastradas.
+
+`POST` /productCategory - Cadastrar uma nova categoria de produto com os dados enviados no corpo da requisição.
+
+`GET` /productCategory/`{id}` - Retorna os dados detalhados da categoria do produto com o `id` informado no parametro de path.
+
+`DELETE` /productCategory/ `{id}` - Apaga a categoria do produto indicado pelo `id` enviado no parametro de path. 
+
+`PUT` /productCategory/`{id}` - Atualizar os dados da categoria do produto com o `id` informado no path, utilizando os novos dados enviados no corpo da requisição.
+
+```js
+{
+	"name": "Mouses"
+}
+```
+### Purchased Itens
+
+`GET` /purchasedItens - Retorna um array com todos os produtos comprados de produtos cadastradas.
+
+`POST` /purchasedItens - Cadastrar novos produtos comprados com os dados enviados no corpo da requisição.
+
+`GET` /purchasedItens/`{id}` - Retorna os dados detalhados dos produtos comprados com o `id` informado no parametro de path.
+
+`DELETE` /purchasedItens/ `{id}` - Apaga os produtos comprados indicado pelo `id` enviado no parametro de path. 
+
+`PUT` /purchasedItens/`{id}` - Atualizar os dados dos produtos comprados com o `id` informado no path, utilizando os novos dados enviados no corpo da requisição.
+
+```js
+{
+	"idProduct": "1",
+	"idBuy": "3",
+	"quantityItens": 5,
+	"unityPrice": 10.99
+}
+```
+
+### Como rodar a aplicação:
 
 Clonar o repositório, abri-lo numa IDE apropriada (no VS-code, por exemplo, ter as extensões apropriadas do Java e SpringBoot) e clicar no botão de run java.
 
