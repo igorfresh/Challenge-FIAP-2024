@@ -2,12 +2,12 @@ package com.challenge.cmg.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,36 +21,37 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.challenge.cmg.model.Client;
-import com.challenge.cmg.repository.ClientRepository;
-
-import jakarta.validation.Valid;
-
+import com.challenge.cmg.model.ProductCategory;
+import com.challenge.cmg.repository.ProductCategoryRepository;
 
 @RestController
-@RequestMapping("client")
-public class ClientController {
+@RequestMapping("productCategory")
+public class ProductCategoryController {
+    
+    @RestController
+@RequestMapping("productCategory")
+public class ProductController {
     
     Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    ClientRepository repository;
+    ProductCategoryRepository repository;
 
     @GetMapping
-    public List<Client> index() {
+    public List<ProductCategory> index() {
         return repository.findAll();
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Client create(@RequestBody @Valid Client client) {
-        log.info("cadastrando cliente {}", client);
-        return repository.save(client);
-    }
+    public ProductCategory create(@RequestBody ProductCategory productCategory) {
+        log.info("cadastrando cliente {}", productCategory);
+        return repository.save(productCategory);
+    } 
 
     @GetMapping("{id}")
-    public ResponseEntity<Client> show(@PathVariable Long id) {
-        log.info("buscando cliente por id {}", id);
+    public ResponseEntity<ProductCategory> show (@PathVariable Long id) {
+        log.info("buscando categoria de produto por id {}", id);
         return repository
             .findById(id)
             .map(ResponseEntity::ok)
@@ -60,27 +61,27 @@ public class ClientController {
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     public void destroy(@PathVariable Long id) {
-        log.info("Apagando cadastro de cliente");
-        verifyExistingClient(id);
+        log.info("Apagando categoria de produto cadastrado");
+        verifyExistingProductCategory(id);
 
         repository.deleteById(id);
     }
 
     @PutMapping("{id}")
-    public Client update (@PathVariable Long id, @RequestBody Client client) {
-        log.info("atualizando cliente com id {} para {}", id, client);
+    public ProductCategory update (@PathVariable Long id, @RequestBody ProductCategory productCategory) {
+        log.info("atualizando produto com id {}", id, productCategory);
 
-        verifyExistingClient(id);
+        verifyExistingProductCategory(id);
 
-        client.setId(id);
-        return repository.save(client);
-    }
+        productCategory.setId(id);
+        return repository.save(productCategory);
+    } 
 
-    private void verifyExistingClient(Long id) {
+    private void verifyExistingProductCategory(Long id) {
         repository
         .findById(id)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-        "Não existe cliente com o id informado. Consulte lista em /client"));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não existe categoria de produto com o id informado. Consulte lista em /productCategory"));
     }
-
+    
+    }
 }

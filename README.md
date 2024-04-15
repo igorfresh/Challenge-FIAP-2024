@@ -25,7 +25,18 @@ Gustavo René Dias Boamorte: Desenvolvedor .NET
 
 Pedro Felipe Barros da Silva: Desenvolvedor Mobile
 
+## Cronograma de Desenvolvimento
 
+| Desenvolvedor | Data |  Tarefa
+|--------|------|:-------------:|
+Igor | 07/04 | Criação Controller Client
+João | 08/04 | Criação Product Model
+Kaue | 09/04 | Criação Compra Model
+Kaue | 10/04 | Readme - endpoint client
+João | 11/04 | Diagrama de entidades
+Igor | 13/04 | Refatoração de entidades
+Igor | 14/04 | Finalização projeto - sem validação
+Igor | 15/04 | Implementação de validação
 
 ## Requisitos
 

@@ -14,8 +14,8 @@ import lombok.Data;
 public class PurchasedItens {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Product idProduct;
-    private Buy idBuy;
+    private String idProduct;
+    private String idBuy;
     private int quantityItens;
     private BigDecimal unityPrice;
 }

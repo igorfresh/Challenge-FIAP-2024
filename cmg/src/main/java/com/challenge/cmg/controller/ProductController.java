@@ -61,6 +61,8 @@ public class ProductController {
     public void destroy(@PathVariable Long id) {
         log.info("Apagando produto cadastrado");
         verifyExistingProduct(id);
+
+        repository.deleteById(id);
     }
 
     @PutMapping("{id}")
