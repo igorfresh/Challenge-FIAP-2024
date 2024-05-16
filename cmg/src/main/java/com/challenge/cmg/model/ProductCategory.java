@@ -14,6 +14,7 @@ import lombok.Data;
 public class ProductCategory {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     @NotBlank(message = "{productCategory.name.notblank}")
     @Size(min = 3, message = "{productCategory.name.size}")
     private String name;
