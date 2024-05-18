@@ -1,15 +1,18 @@
 package com.challenge.cmg.config;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import com.challenge.cmg.model.Buy;
 import com.challenge.cmg.model.Client;
 import com.challenge.cmg.model.Product;
 import com.challenge.cmg.model.ProductCategory;
+import com.challenge.cmg.model.PurchasedItens;
 import com.challenge.cmg.repository.BuyRepository;
 import com.challenge.cmg.repository.ClientRepository;
 import com.challenge.cmg.repository.ProductCategoryRepository;
@@ -131,5 +134,25 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .build()
             ));
 
+            buyRepository.saveAll(List.of(
+                Buy.builder()
+                .id(1L)
+                .datePurchase(LocalDate.of(2018, 07, 22))
+                .purchaseStatus("ENTREGUE")
+                .totalPurchaseValue(new BigDecimal(300.53))
+                .client(clientRepository.findById(1L).get())
+                .build()
+
+            ));
+
+            purchasedItensRepository.saveAll(List.of(
+                PurchasedItens.builder()
+                .id(1l)
+                .quantityItens(3)
+                .unityPrice(new BigDecimal(55.90))
+                .product(productRepository.findById(1L).get())
+                .buy(buyRepository.findById(1l).get())
+                .build()
+            ));
     }
 }

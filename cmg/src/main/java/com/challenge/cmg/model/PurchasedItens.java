@@ -8,14 +8,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PurchasedItens {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,11 +31,11 @@ public class PurchasedItens {
     @Positive(message = "{purchasedItens.unityPrice.positive}") 
     private BigDecimal unityPrice;
     
-    @NotBlank(message = "{purchasedItens.idProduct.notblank}")
+    @NotNull(message = "{purchasedItens.idProduct.notblank}")
     @ManyToOne
     private Product product;
 
-    @NotBlank(message = "{purchasedItens.idBuy.notblank}")
+    @NotNull(message = "{purchasedItens.idBuy.notblank}")
     @ManyToOne
     private Buy buy;
 }

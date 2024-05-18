@@ -8,14 +8,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class Buy {
     @Id
@@ -31,9 +36,9 @@ public class Buy {
     @Positive(message = "{buy.totalPurchaseValue.positive}")
     private BigDecimal totalPurchaseValue;
 
-    @NotBlank(message = "{buy.idclient.notblank}")
+    @NotNull(message = "{buy.idclient.notblank}")
     @ManyToOne
-    private Client Client;
+    private Client client;
 
     
 
