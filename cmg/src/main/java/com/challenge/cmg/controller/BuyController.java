@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -33,6 +36,7 @@ import com.challenge.cmg.repository.BuyRepository;
 import jakarta.validation.Valid;
 
 @RestController
+@CacheConfig(cacheNames = "compras")
 @RequestMapping("buy")
 public class BuyController {
     
@@ -42,6 +46,7 @@ public class BuyController {
     BuyRepository repository;
 
     @GetMapping
+    @Cacheable
     public Page<Buy> index(
         @RequestParam(required = false) LocalDate datePurchase,
         @PageableDefault(size = 3, sort = "datePurchase", direction = Direction.ASC) Pageable pageable
@@ -56,6 +61,7 @@ public class BuyController {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @CacheEvict(allEntries = true)
     public Buy create(@RequestBody @Valid Buy buy) {
         log.info("cadastrando compra {}", buy);
         return repository.save(buy);
@@ -72,6 +78,7 @@ public class BuyController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @CacheEvict(allEntries = true)
     public void destroy(@PathVariable Long id) {
         log.info("Apagando compra com id {}");
         verifyExistingBuy(id);
@@ -80,6 +87,7 @@ public class BuyController {
     }
 
     @PutMapping("{id}")
+    @CacheEvict(allEntries = true)
     public Buy update (@PathVariable Long id, @RequestBody Buy buy) {
         log.info("atualizando compra com id {}", id, buy);
 

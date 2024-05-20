@@ -6,6 +6,9 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -31,6 +34,7 @@ import jakarta.validation.Valid;
 
 
 @RestController
+@CacheConfig(cacheNames = "clientes")
 @RequestMapping("client")
 public class ClientController {
     
@@ -40,6 +44,7 @@ public class ClientController {
     ClientRepository repository;
 
     @GetMapping
+    @Cacheable
     public Page<Client> index(
     @RequestParam(required = false) String name,
         @PageableDefault(size = 3, sort = "name", direction = Direction.ASC ) Pageable pageable
@@ -53,6 +58,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @CacheEvict(allEntries = true)
     public Client create(@RequestBody @Valid Client client) {
         log.info("cadastrando cliente {}", client);
         return repository.save(client);
@@ -69,6 +75,7 @@ public class ClientController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @CacheEvict(allEntries = true)
     public void destroy(@PathVariable Long id) {
         log.info("Apagando cadastro de cliente");
         verifyExistingClient(id);
@@ -77,6 +84,7 @@ public class ClientController {
     }
 
     @PutMapping("{id}")
+    @CacheEvict(allEntries = true)
     public Client update (@PathVariable Long id, @RequestBody Client client) {
         log.info("atualizando cliente com id {} para {}", id, client);
 

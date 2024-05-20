@@ -6,6 +6,9 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -32,6 +35,7 @@ import jakarta.validation.Valid;
 
 
 @RestController
+@CacheConfig(cacheNames = "produtos")
 @RequestMapping("product")
 public class ProductController {
     
@@ -41,6 +45,7 @@ public class ProductController {
     ProductRepository repository;
 
     @GetMapping
+    @Cacheable
     public Page<Product> index(
         @RequestParam(required = false) String name,
         @PageableDefault(size = 3, sort = "name", direction = Direction.ASC) Pageable pageable
@@ -53,6 +58,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @CacheEvict(allEntries = true)
     public Product create(@RequestBody @Valid Product product) {
         log.info("cadastrando cliente {}", product);
         return repository.save(product);
@@ -69,6 +75,7 @@ public class ProductController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @CacheEvict(allEntries = true)
     public void destroy(@PathVariable Long id) {
         log.info("Apagando produto cadastrado");
         verifyExistingProduct(id);
@@ -77,6 +84,7 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
+    @CacheEvict(allEntries = true)
     public Product update (@PathVariable Long id, @RequestBody Product product) {
         log.info("atualizando produto com id {}", id, product);
 

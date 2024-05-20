@@ -6,6 +6,9 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -30,6 +33,7 @@ import com.challenge.cmg.repository.ProductCategoryRepository;
 import jakarta.validation.Valid;
 
 @RestController
+@CacheConfig(cacheNames = "categoria de produtos")
 @RequestMapping("productCategory")
 public class ProductCategoryController {
     
@@ -43,6 +47,7 @@ public class ProductController {
     ProductCategoryRepository repository;
 
     @GetMapping
+    @Cacheable
     public Page<ProductCategory> index(
         @RequestParam(required = false) String name,
         @PageableDefault(size = 2, sort = "name", direction = Direction.ASC) Pageable pageable
@@ -56,6 +61,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @CacheEvict(allEntries = true)
     public ProductCategory create(@RequestBody @Valid ProductCategory productCategory) {
         log.info("cadastrando cliente {}", productCategory);
         return repository.save(productCategory);
@@ -72,6 +78,7 @@ public class ProductController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @CacheEvict(allEntries = true)
     public void destroy(@PathVariable Long id) {
         log.info("Apagando categoria de produto cadastrado");
         verifyExistingProductCategory(id);
@@ -80,6 +87,7 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
+    @CacheEvict(allEntries = true)
     public ProductCategory update (@PathVariable Long id, @RequestBody ProductCategory productCategory) {
         log.info("atualizando produto com id {}", id, productCategory);
 

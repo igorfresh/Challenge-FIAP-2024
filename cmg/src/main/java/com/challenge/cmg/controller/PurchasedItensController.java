@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -32,6 +35,7 @@ import com.challenge.cmg.repository.PurchasedItensRepository;
 import jakarta.validation.Valid;
 
 @RestController
+@CacheConfig(cacheNames = "itens comprados")
 @RequestMapping("purchasedItens")
 public class PurchasedItensController {
     
@@ -41,6 +45,7 @@ public class PurchasedItensController {
     PurchasedItensRepository repository;
 
     @GetMapping
+    @Cacheable
     public Page<PurchasedItens> index(
         @RequestParam(required = false) BigDecimal unityPrice,
         @PageableDefault(size = 3, sort = "unityPrice", direction = Direction.ASC) Pageable pageable
@@ -53,6 +58,7 @@ public class PurchasedItensController {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @CacheEvict(allEntries = true)
     public PurchasedItens create(@RequestBody @Valid PurchasedItens purchasedItens) {
         log.info("cadastrando itens comprados {}", purchasedItens);
         return repository.save(purchasedItens);
@@ -69,6 +75,7 @@ public class PurchasedItensController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
+    @CacheEvict(allEntries = true)
     public void destroy(@PathVariable Long id) {
         log.info("Apagando itens comprados");
         verifyExistingProduct(id);
@@ -77,6 +84,7 @@ public class PurchasedItensController {
     }
 
     @PutMapping("{id}")
+    @CacheEvict(allEntries = true)
     public PurchasedItens update (@PathVariable Long id, @RequestBody PurchasedItens purchasedItens) {
         log.info("atualizando itens comprados com id {}", id, purchasedItens);
 
