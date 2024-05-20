@@ -45,4 +45,8 @@ public class Client {
     @Pattern(regexp = "\\d{5}-\\d{3}", message = "{client.cep.invalid}")
     private String cep;
 
+
+    public Client(Long id) {
+        this.id = id;
+    }
 }

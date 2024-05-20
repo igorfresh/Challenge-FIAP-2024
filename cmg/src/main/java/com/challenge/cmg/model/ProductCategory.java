@@ -23,6 +23,10 @@ public class ProductCategory {
     @NotBlank(message = "{productCategory.name.notblank}")
     @Size(min = 3, message = "{productCategory.name.size}")
     private String name;
+
+    public ProductCategory(Long id) {
+        this.id = id;
+    }
 }
 
 

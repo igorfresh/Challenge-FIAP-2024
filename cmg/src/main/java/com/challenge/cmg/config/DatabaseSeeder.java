@@ -99,19 +99,8 @@ public class DatabaseSeeder implements CommandLineRunner {
         ));
 
         clientRepository.saveAll(List.of(
-                Client.builder()
+            Client.builder()
                 .id(1L)
-                .name("Igor Miguel Silva")
-                .cpf("123.456.789-10")
-                .email("igormiguelsilva@email.com")
-                .phone("(11) 91234-5678")
-                .adress("Rua do Java Advanced, 306")
-                .city("São Paulo")
-                .state("SP")
-                .cep("01234-567")
-                .build(),
-                Client.builder()
-                .id(2L)
                 .name("João Pedro Costa Feitosa")
                 .cpf("987.654.321-00")
                 .email("joaopedrocostafeitosa@email.com")
@@ -120,6 +109,17 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .city("São Caetano do Sul")
                 .state("SP")
                 .cep("09560-535")
+                .build(),
+                Client.builder()
+                .id(2L)
+                .name("Igor Miguel Silva")
+                .cpf("123.456.789-10")
+                .email("igormiguelsilva@email.com")
+                .phone("(11) 91234-5678")
+                .adress("Rua do Java Advanced, 306")
+                .city("São Paulo")
+                .state("SP")
+                .cep("01234-567")
                 .build(),
                 Client.builder()
                 .id(3L)
@@ -141,17 +141,59 @@ public class DatabaseSeeder implements CommandLineRunner {
                 .purchaseStatus("ENTREGUE")
                 .totalPurchaseValue(new BigDecimal(300.53))
                 .client(clientRepository.findById(1L).get())
+                .build(),
+                Buy.builder()
+                .id(2L)
+                .datePurchase(LocalDate.of(2015, 05, 14))
+                .purchaseStatus("PENDENTE")
+                .totalPurchaseValue(new BigDecimal(300.53))
+                .client(clientRepository.findById(1L).get())
+                .build(),
+                Buy.builder()
+                .id(3L)
+                .datePurchase(LocalDate.of(2023, 10, 30))
+                .purchaseStatus("CANCELADA")
+                .totalPurchaseValue(new BigDecimal(300.53))
+                .client(clientRepository.findById(1L).get())
                 .build()
 
             ));
 
             purchasedItensRepository.saveAll(List.of(
                 PurchasedItens.builder()
-                .id(1l)
+                .id(1L)
                 .quantityItens(3)
                 .unityPrice(new BigDecimal(55.90))
                 .product(productRepository.findById(1L).get())
-                .buy(buyRepository.findById(1l).get())
+                .buy(buyRepository.findById(1L).get())
+                .build(),
+                PurchasedItens.builder()
+                .id(2L)
+                .quantityItens(10)
+                .unityPrice(new BigDecimal(427.98))
+                .product(productRepository.findById(3L).get())
+                .buy(buyRepository.findById(2L).get())
+                .build(),
+                PurchasedItens.builder()
+                .id(3L)
+                .quantityItens(3)
+                .unityPrice(new BigDecimal(27.98))
+                .product(productRepository.findById(3L).get())
+                .buy(buyRepository.findById(2L).get())
+                .build(),
+                PurchasedItens.builder()
+                .id(4L)
+                .quantityItens(2)
+                .unityPrice(new BigDecimal(270.98))
+                .product(productRepository.findById(2L).get())
+                .buy(buyRepository.findById(1L).get())
+                .build(),
+                PurchasedItens.builder()
+                .id(5L)
+                .quantityItens(1)
+                .unityPrice(new BigDecimal(300.00))
+                .product(productRepository.findById(2L).get())
+                .buy(buyRepository.findById(1L).get())
                 .build()
             ));
     }

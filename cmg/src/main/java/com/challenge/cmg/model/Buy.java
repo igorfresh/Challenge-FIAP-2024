@@ -40,6 +40,8 @@ public class Buy {
     @ManyToOne
     private Client client;
 
-    
+    public Buy(Long id) {
+        this.id = id;
+    }
 
 }

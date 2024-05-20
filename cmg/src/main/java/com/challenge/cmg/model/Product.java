@@ -34,5 +34,7 @@ public class Product {
     @ManyToOne
     private ProductCategory productCategory;
     
-    
+    public Product(Long id) {
+        this.id = id;
+    }
 }
