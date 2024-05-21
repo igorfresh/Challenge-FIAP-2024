@@ -30,12 +30,15 @@ import org.springframework.web.server.ResponseStatusException;
 import com.challenge.cmg.model.Client;
 import com.challenge.cmg.repository.ClientRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 
 @RestController
 @CacheConfig(cacheNames = "clientes")
 @RequestMapping("client")
+@Tag(name = "clientes", description = "Clientes cadastrados")
 public class ClientController {
     
     Logger log = LoggerFactory.getLogger(getClass());
@@ -45,6 +48,10 @@ public class ClientController {
 
     @GetMapping
     @Cacheable
+    @Operation(
+        summary = "Listar Clientes",
+        description = "Retorna uma página com todas os clientes cadastrados ordenada por ordem alfabética"
+    )
     public Page<Client> index(
     @RequestParam(required = false) String name,
         @PageableDefault(size = 3, sort = "name", direction = Direction.ASC ) Pageable pageable
@@ -59,12 +66,20 @@ public class ClientController {
     @PostMapping
     @ResponseStatus(CREATED)
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Cadastrar cliente",
+        description = "Cadastra um novo cliente com os dados do corpo da requisição."
+    )
     public Client create(@RequestBody @Valid Client client) {
         log.info("cadastrando cliente {}", client);
         return repository.save(client);
     }
 
     @GetMapping("{id}")
+    @Operation(
+        summary = "Listar cliente por ID",
+        description = "Retorna um determinado cliente correspondente com o ID selecionado."
+    )
     public ResponseEntity<Client> show(@PathVariable Long id) {
         log.info("buscando cliente por id {}", id);
         return repository
@@ -76,6 +91,10 @@ public class ClientController {
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Deletar cliente",
+        description = "Deleta um determinado cliente correspondente com o ID selecionado."
+    )
     public void destroy(@PathVariable Long id) {
         log.info("Apagando cadastro de cliente");
         verifyExistingClient(id);
@@ -85,6 +104,10 @@ public class ClientController {
 
     @PutMapping("{id}")
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Atualizar cliente",
+        description = "Atualiza um determinado cliente correspondente com o ID selecionado."
+    )
     public Client update (@PathVariable Long id, @RequestBody Client client) {
         log.info("atualizando cliente com id {} para {}", id, client);
 

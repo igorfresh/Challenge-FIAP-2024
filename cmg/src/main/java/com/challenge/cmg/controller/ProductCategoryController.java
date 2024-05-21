@@ -30,16 +30,16 @@ import org.springframework.web.server.ResponseStatusException;
 import com.challenge.cmg.model.ProductCategory;
 import com.challenge.cmg.repository.ProductCategoryRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @CacheConfig(cacheNames = "categoria de produtos")
 @RequestMapping("productCategory")
+@Tag(name = "categorias de produto", description = "Categorias de produto disponíveis")
 public class ProductCategoryController {
     
-    @RestController
-@RequestMapping("productCategory")
-public class ProductController {
     
     Logger log = LoggerFactory.getLogger(getClass());
 
@@ -48,6 +48,10 @@ public class ProductController {
 
     @GetMapping
     @Cacheable
+    @Operation(
+        summary = "Listar categorias de produto",
+        description = "Retorna uma página com todas categorias de produto cadastradas ordenada por ordem alfabética"
+    )
     public Page<ProductCategory> index(
         @RequestParam(required = false) String name,
         @PageableDefault(size = 2, sort = "name", direction = Direction.ASC) Pageable pageable
@@ -62,12 +66,20 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(CREATED)
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Cadastrar categoria de produto",
+        description = "Cadastra uma nova categoria de produto com os dados do corpo da requisição."
+    )
     public ProductCategory create(@RequestBody @Valid ProductCategory productCategory) {
         log.info("cadastrando cliente {}", productCategory);
         return repository.save(productCategory);
     } 
 
     @GetMapping("{id}")
+    @Operation(
+        summary = "Listar categoria de produto por ID",
+        description = "Retorna uma determinada categoria de produto correspondente com o ID selecionado."
+    )
     public ResponseEntity<ProductCategory> show (@PathVariable Long id) {
         log.info("buscando categoria de produto por id {}", id);
         return repository
@@ -79,6 +91,10 @@ public class ProductController {
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Deletar categoria de produto",
+        description = "Deleta uma determinada categoria de produto correspondente com o ID selecionado."
+    )
     public void destroy(@PathVariable Long id) {
         log.info("Apagando categoria de produto cadastrado");
         verifyExistingProductCategory(id);
@@ -88,6 +104,10 @@ public class ProductController {
 
     @PutMapping("{id}")
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Atualizar categoria de produto",
+        description = "Atualiza uma determinada categoria de produto correspondente com o ID selecionado."
+    )
     public ProductCategory update (@PathVariable Long id, @RequestBody ProductCategory productCategory) {
         log.info("atualizando produto com id {}", id, productCategory);
 
@@ -103,5 +123,4 @@ public class ProductController {
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não existe categoria de produto com o id informado. Consulte lista em /productCategory"));
     }
     
-    }
 }

@@ -30,6 +30,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.challenge.cmg.model.Product;
 import com.challenge.cmg.repository.ProductRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 
@@ -37,6 +39,7 @@ import jakarta.validation.Valid;
 @RestController
 @CacheConfig(cacheNames = "produtos")
 @RequestMapping("product")
+@Tag(name = "produtos", description = "Produtos disponíveis e que serão recomendados")
 public class ProductController {
     
     Logger log = LoggerFactory.getLogger(getClass());
@@ -46,6 +49,10 @@ public class ProductController {
 
     @GetMapping
     @Cacheable
+    @Operation(
+        summary = "Listar produtos cadastrados",
+        description = "Retorna uma página com todos os produtos cadastrados ordenados em ordem alfabética"
+    )
     public Page<Product> index(
         @RequestParam(required = false) String name,
         @PageableDefault(size = 3, sort = "name", direction = Direction.ASC) Pageable pageable
@@ -59,12 +66,20 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(CREATED)
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Cadastrar produto",
+        description = "Cadastra um novo produto com os dados do corpo da requisição."
+    )
     public Product create(@RequestBody @Valid Product product) {
         log.info("cadastrando cliente {}", product);
         return repository.save(product);
     } 
 
     @GetMapping("{id}")
+    @Operation(
+        summary = "Listar produto por ID",
+        description = "Retorna um determinado produto correspondente com o ID selecionado."
+    )
     public ResponseEntity<Product> show (@PathVariable Long id) {
         log.info("buscando produto por id {}", id);
         return repository
@@ -76,6 +91,10 @@ public class ProductController {
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Deletar produto",
+        description = "Deleta um determinado produto correspondente com o ID selecionado."
+    )
     public void destroy(@PathVariable Long id) {
         log.info("Apagando produto cadastrado");
         verifyExistingProduct(id);
@@ -85,6 +104,10 @@ public class ProductController {
 
     @PutMapping("{id}")
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Atualizar produto",
+        description = "Atualiza um determinado produto correspondente com o ID selecionado."
+    )
     public Product update (@PathVariable Long id, @RequestBody Product product) {
         log.info("atualizando produto com id {}", id, product);
 

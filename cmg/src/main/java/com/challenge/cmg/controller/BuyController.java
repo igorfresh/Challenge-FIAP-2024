@@ -33,11 +33,14 @@ import org.springframework.web.server.ResponseStatusException;
 import com.challenge.cmg.model.Buy;
 import com.challenge.cmg.repository.BuyRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @CacheConfig(cacheNames = "compras")
 @RequestMapping("buy")
+@Tag(name = "compras", description = "Compras realizadas")
 public class BuyController {
     
     Logger log = LoggerFactory.getLogger(getClass());
@@ -47,6 +50,10 @@ public class BuyController {
 
     @GetMapping
     @Cacheable
+    @Operation(
+        summary = "Listar Compras",
+        description = "Retorna uma página com todas as compras cadastradas ordenada pelo data da compra"
+    )
     public Page<Buy> index(
         @RequestParam(required = false) LocalDate datePurchase,
         @PageableDefault(size = 3, sort = "datePurchase", direction = Direction.ASC) Pageable pageable
@@ -62,12 +69,20 @@ public class BuyController {
     @PostMapping
     @ResponseStatus(CREATED)
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Cadastrar compra",
+        description = "Cadastra uma nova compra com os dados do corpo da requisição."
+    )
     public Buy create(@RequestBody @Valid Buy buy) {
         log.info("cadastrando compra {}", buy);
         return repository.save(buy);
     }
 
     @GetMapping("{id}")
+    @Operation(
+        summary = "Listar compra por ID",
+        description = "Retorna uma determinada compra correspondente com o ID selecionado."
+    )
     public ResponseEntity<Buy> show (@PathVariable Long id) {
         log.info("buscando compra por id {}", id);
         return repository
@@ -79,6 +94,10 @@ public class BuyController {
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Deletar compra",
+        description = "Deleta uma determinada compra correspondente com o ID selecionado."
+    )
     public void destroy(@PathVariable Long id) {
         log.info("Apagando compra com id {}");
         verifyExistingBuy(id);
@@ -88,6 +107,10 @@ public class BuyController {
 
     @PutMapping("{id}")
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Atualizar compra",
+        description = "Atualiza uma determinada compra correspondente com o ID selecionado."
+    )
     public Buy update (@PathVariable Long id, @RequestBody Buy buy) {
         log.info("atualizando compra com id {}", id, buy);
 

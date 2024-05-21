@@ -32,11 +32,14 @@ import org.springframework.web.server.ResponseStatusException;
 import com.challenge.cmg.model.PurchasedItens;
 import com.challenge.cmg.repository.PurchasedItensRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @CacheConfig(cacheNames = "itens comprados")
 @RequestMapping("purchasedItens")
+@Tag(name = "Itens comprados", description = "Itens comprados em cada compra")
 public class PurchasedItensController {
     
     Logger log = LoggerFactory.getLogger(getClass());
@@ -46,6 +49,10 @@ public class PurchasedItensController {
 
     @GetMapping
     @Cacheable
+    @Operation(
+        summary = "Listar itens da compra",
+        description = "Retorna uma página com todas os itens de uma determinada compra ordenada pelo preço."
+    )
     public Page<PurchasedItens> index(
         @RequestParam(required = false) BigDecimal unityPrice,
         @PageableDefault(size = 3, sort = "unityPrice", direction = Direction.ASC) Pageable pageable
@@ -59,12 +66,20 @@ public class PurchasedItensController {
     @PostMapping
     @ResponseStatus(CREATED)
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Cadastrar itens comprados",
+        description = "Cadastra novos itens comprados com os dados do corpo da requisição."
+    )
     public PurchasedItens create(@RequestBody @Valid PurchasedItens purchasedItens) {
         log.info("cadastrando itens comprados {}", purchasedItens);
         return repository.save(purchasedItens);
     } 
 
     @GetMapping("{id}")
+    @Operation(
+        summary = "Listar itens comprados por ID",
+        description = "Retorna uma determinada compra de itens correspondente com o ID selecionado."
+    )
     public ResponseEntity<PurchasedItens> show (@PathVariable Long id) {
         log.info("buscando itens comprados por id {}", id);
         return repository
@@ -76,6 +91,10 @@ public class PurchasedItensController {
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Deletar itens comprados",
+        description = "Deleta determinados itens comprados correspondente com o ID selecionado."
+    )
     public void destroy(@PathVariable Long id) {
         log.info("Apagando itens comprados");
         verifyExistingProduct(id);
@@ -85,6 +104,10 @@ public class PurchasedItensController {
 
     @PutMapping("{id}")
     @CacheEvict(allEntries = true)
+    @Operation(
+        summary = "Atualizar itens comprados",
+        description = "Atualiza determinados itens comprados correspondente com o ID selecionado."
+    )
     public PurchasedItens update (@PathVariable Long id, @RequestBody PurchasedItens purchasedItens) {
         log.info("atualizando itens comprados com id {}", id, purchasedItens);
 
