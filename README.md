@@ -39,6 +39,12 @@ Igor | 14/04 | Finalização projeto - sem validação
 Igor | 15/04 | Implementação de validação
 Igor | 15/04 | Finalização de validação
 Igor | 15/04 | Finalização da documentação
+Igor | 16/05 | Relacionamento
+Igor | 17/05 | DatabaseSeeder e inserir Swagger
+Igor | 18/05 | DatabaseSeeder completo
+Igor | 20/05 | Paginação
+Igor | 20/05 | Cache e Swagger completo
+
 
 ## Diagramas e arquitetura
 
@@ -49,6 +55,10 @@ Igor | 15/04 | Finalização da documentação
 [[Video Pitch]](https://www.youtube.com/watch?v=UZNU6DygUj8)
 
  ## Documentação
+Para acessar a documentação no Swagger, basta rodar a aplicação e acessar a URL abaixo
+ ```
+localhost:8080/doc-personalbuy
+```
 
  ### Endpoints
 
@@ -97,6 +107,7 @@ Igor | 15/04 | Finalização da documentação
 {
 	"name": "Mouse Gamer",
 	"price": 45.99
+	"productCategory": 1
 }
 ```
 ##### Exemplos de validações da requisição
@@ -117,7 +128,7 @@ Igor | 15/04 | Finalização da documentação
 
 ```js
 {
-	"idClient": "1",
+	"client": "1",
 	"datePurchase": "2023-10-10",
 	"purchaseStatus": "Em transito",
 	"totalPurchaseValue": 21.99
@@ -164,8 +175,8 @@ Igor | 15/04 | Finalização da documentação
 
 ```js
 {
-	"idProduct": "1",
-	"idBuy": "3",
+	"product": "1",
+	"buy": "3",
 	"quantityItens": 5,
 	"unityPrice": 10.99
 }
