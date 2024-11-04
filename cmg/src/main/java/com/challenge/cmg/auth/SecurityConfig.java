@@ -20,7 +20,8 @@ public class SecurityConfig {
                 auth
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/client").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/**").permitAll()
+                        .requestMatchers("/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/login").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/client/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/client/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/product").permitAll()

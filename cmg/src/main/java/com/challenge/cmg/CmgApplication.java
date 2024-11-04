@@ -1,5 +1,7 @@
 package com.challenge.cmg;
 
+import com.vaadin.flow.component.page.AppShellConfigurator;
+import com.vaadin.flow.theme.Theme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -18,7 +20,8 @@ import io.swagger.v3.oas.annotations.info.Info;
 		version = "1.0.0"
 	)
 )
-public class CmgApplication {
+@Theme(value = "my-theme", variant = "dark")
+public class CmgApplication implements AppShellConfigurator {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CmgApplication.class, args);
