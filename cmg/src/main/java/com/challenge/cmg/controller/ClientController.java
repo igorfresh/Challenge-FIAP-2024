@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +46,13 @@ public class ClientController {
 
     @Autowired
     ClientRepository repository;
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
+    public ClientController(ClientRepository repository, PasswordEncoder passwordEncoder) {
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping
     @Cacheable
@@ -72,6 +80,7 @@ public class ClientController {
     )
     public Client create(@RequestBody @Valid Client client) {
         log.info("cadastrando cliente {}", client);
+        client.setPassword(passwordEncoder.encode(client.getPassword()));
         return repository.save(client);
     }
 
