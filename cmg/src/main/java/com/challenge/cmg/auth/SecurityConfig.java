@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/purchasedItens/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/purchasedItens/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/purchasedItens/**").permitAll()
+                        .requestMatchers("/chat/**").permitAll()
                         .anyRequest().authenticated()
         );
 
